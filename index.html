@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+  <head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>SME Angola - Portal Oficial de Agendamento de Passaporte Online</title>
+
+<!-- Verificação Google Search Console -->
+
+
+<!-- Verificação Bing Webmaster Tools -->
+
+
+
+<!-- Open Graph para Facebook, WhatsApp, LinkedIn -->
+
+<meta property="og:title" content="SME Angola - Portal Oficial de Agendamento de Passaporte">
+<meta property="og:description" content="Agende seu passaporte online. Taxas: Normal 30.500 Kz, Urgente 45.000 Kz. Serviço oficial do SME.">
+<meta property="og:image" content="https://sme-gov-ao.github.io/agendamento-/logo-sme.png">
+<meta property="og:url" content="https://sme-gov-ao.github.io/agendamento-/">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SME Angola - Agendamento de Passaporte">
+<meta name="twitter:description" content="Portal Oficial do Serviço de Migração e Estrangeiros de Angola">
+<meta name="twitter:image" content="https://sme-gov-ao.github.io/agendamento-/logo-sme.png">
+<meta name="description" content="Portal Oficial do SME Angola para agendamento de passaporte online. Emita ou renove seu passaporte. Taxas: normal 30.500 Kz, urgente 45.000 Kz.">
+<meta name="keywords" content="SME Angola, passaporte, agendamento passaporte, migração Angola, SME Luanda, renovar passaporte">
+<meta name="author" content="Serviço de Migração e Estrangeiros - Angola">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f5f5f5;color:#333}
+.header{background:#1E5AA8;color:white;padding:20px;text-align:center}
+.header h1{font-size:24px;margin:10px 0}
+.badge{background:#FFD500;color:#1E5AA8;padding:5px 15px;border-radius:20px;font-weight:bold;display:inline-block}
+.nav{background:#164080;padding:10px;text-align:center}
+.nav a{color:white;text-decoration:none;margin:0 15px;font-weight:bold}
+.container{max-width:900px;margin:20px auto;padding:20px;background:white;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+.section{margin-bottom:30px;padding:20px;border-left:4px solid #1E5AA8}
+.section h2{color:#1E5AA8;margin-bottom:15px}
+.etapa{background:#f9f9f9;border:2px solid #ddd;padding:20px;margin-bottom:15px;border-radius:8px}
+.etapa.ativa{border-color:#1E5AA8;background:#e8f1ff}
+.etapa h3{color:#1E5AA8;margin-bottom:15px}
+input,select{width:100%;padding:12px;margin:8px 0;border:2px solid #ddd;border-radius:5px;font-size:16px}
+input:focus,select:focus{border-color:#1E5AA8;outline:none}
+label{display:block;margin:10px 0;padding:10px;background:white;border-radius:5px;cursor:pointer}
+label:hover{background:#f0f0f0}
+button{background:#1E5AA8;color:white;padding:14px 30px;border:none;border-radius:5px;font-size:16px;cursor:pointer;margin:10px 5px;font-weight:bold}
+button:hover{background:#164080}
+button:disabled{background:#ccc;cursor:not-allowed}
+.btn-voltar{background:#666}
+.btn-voltar:hover{background:#444}
+.erro{color:red;font-size:14px;margin-top:5px;display:none}
+.sucesso{color:green;font-weight:bold}
+.progresso{background:#ddd;height:30px;border-radius:15px;margin:20px 0;overflow:hidden}
+.progresso-barra{background:#1E5AA8;height:100%;width:0%;transition:width 0.3s;text-align:center;color:white;line-height:30px;font-weight:bold}
+.footer{background:#1E5AA8;color:white;text-align:center;padding:20px;margin-top:40px}
+.footer a{color:#FFD500}
+.hidden{display:none}
+@media(max-width:600px){.container{margin:10px;padding:10px}.nav a{display:block;margin:5px 0}}
+/* Botão WhatsApp Flutuante */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+.whatsapp-float:hover {
+    background-color: #128c7e;
+}
+/* Contador */
+.contador {
+    background: linear-gradient(135deg, #0066cc, #004499);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 30px 0;
+}
+.contador h3 {
+    font-size: 36px;
+    margin: 0;
+}
+/* FAQ */
+.faq-item {
+    background: #f8f9fa;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 4px solid #0066cc;
+    border-radius: 5px;
+}
+.faq-item strong {
+    color: #0066cc;
+}
+/* Documentos */
+.doc-box {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+.doc-box h4 {
+    color: #856404;
+    margin-top: 0;
+}
+.doc-box ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+.doc-box li {
+    margin: 8px 0;
+}
+</style>
+
+<!-- Favicon -->
+
+<link rel=" icon"  type=" imagem / png"  href=" logo-sme . png">
+
+  <!-- Dados Estruturados Google - Organização Governamental -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GovernmentOrganization",
+    "name": "Serviço de Migração e Estrangeiros - Angola",
+    "alternateName": "SME Angola",
+    "url": " https://sme-gov-ao.github.io/agendamento-/ ",
+    "logo": "https://sme-gov-ao.github.io/agendamento-/logo-sme.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+244-938-510-719",
+      "contactType": "customer service",
+      "email": "sme.gov.contacto@gmail.com"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua Amílcar Cabral",
+      "addressLocality": "Maianga, Luanda",
+      "addressCountry": "AO"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<div class="header">
+<img src="logo-sme.png" alt="SME Angola" style="height:70px;margin:0 15px;vertical-align:middle">
+<img src="logo-governo.png" alt="Governo de Angola" style="height:70px;margin:0 15px;vertical-align:middle">
+<h1>SME <br>Serviço de Migração e Estrangeiros</h1>
+<span class="badge">PORTAL OFICIAL</span>
+<p style="margin-top:10px;font-size:18px">Agendamento de Passaporte Angolano Online</p>
+</div>
+
+<div class="nav">
+<a href="#inicio">Início</a>
+<a href="#sobre">Sobre</a>
+<a href="#legislacao">Legislação</a>
+<a href="#comunicacao">Comunicação</a>
+<a href="#agendar">Agendar Passaporte</a>
+</div>
+
+<div class="container">
+
+<div class="progresso"><div class="progresso-barra" id="barraProgresso">Etapa 1 de 8</div></div>
+
+<div class="section" id="sobre">
+<h2>Sobre o SME</h2>
+<p><strong>Missão:</strong> Garantir o controlo migratório e emissão de documentos de viagem com segurança, celeridade e transparência.</p>
+<p><strong>Visão:</strong> Ser instituição de referência em África na gestão migratória.</p>
+<p><strong>Valores:</strong> Legalidade, Integridade, Excelência no Atendimento, Inovação, Patriotismo.</p>
+</div>
+
+<div class="section" id="legislacao">
+<h2>Legislação</h2>
+<ul>
+<li>Lei nº 2/07 de 31 de Agosto - Regime Jurídico dos Estrangeiros</li>
+<li>Decreto Presidencial nº 108/11 - Regulamento sobre Passaportes</li>
+<li>Decreto Executivo nº 10/19 - Taxas de Emolumentos do SME</li>
+<li>Lei nº 13/19 - Proteção de Dados Pessoais</li>
+</ul>
+</div>
+
+<div class="section" id="comunicacao">
+<h2>Comunicação</h2>
+<p><strong>WhatsApp:</strong> <a href="https://wa.me/244938510719">+244 938 510 719</a></p>
+<p><strong>Email:</strong> sme.gov.contacto@gmail.com</p>
+<p><strong>Sede:</strong> Rua Amílcar Cabral, Maianga, Luanda</p>
+</div>
+
+<div class="section" id="agendar">
+<h2>Agendamento de Passaporte</h2>
+
+<div class="etapa ativa" id="etapa1">
+<h3>1. Criar Conta</h3>
+<input type="text" id="nome" placeholder="Nome completo" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="tel" id="telefone" placeholder="+244 9XX XXX XXX" required>
+<input type="password" id="senha" placeholder="Senha" required>
+<div class="erro" id="erro1"></div>
+<button onclick="validarEtapa1()">Continuar</button>
+</div>
+
+<div class="etapa hidden" id="etapa2">
+<h3>2. Dados Pessoais</h3>
+<input type="text" id="nomeCompleto" placeholder="Nome completo" required>
+<input type="text" id="bi" placeholder="Nº BI: 123456789LA123" required>
+<input type="date" id="dataNasc" required="" max="2026-09-17" />
+<input type="text" id="morada" placeholder="Morada completa" required>
+<div class="erro" id="erro2"></div>
+<button class="btn-voltar" onclick="voltarEtapa(1)">Voltar</button>
+<button onclick="validarEtapa2()">Continuar</button>
+</div>
+
+<div class="etapa hidden" id="etapa3">
+<h3>3. Local de Atendimento</h3>
+<select id="provincia" onchange="carregarMunicipios()" required>
+<option value="" selected>Selecione a Província</option>
+<option value="Luanda">Luanda</option>
+<option value="Bengo">Bengo</option>
+<option value="Benguela">Benguela</option>
+<option value="Bié">Bié</option>
+<option value="Cabinda">Cabinda</option>
+<option value="Cuando Cubango">Cuando Cubango</option>
+<option value="Cuanza Norte">Cuanza Norte</option>
+<option value="Cuanza Sul">Cuanza Sul</option>
+<option value="Cunene">Cunene</option>
+<option value="Huambo">Huambo</option>
+<option value="Huíla">Huíla</option>
+<option value="Lunda Norte">Lunda Norte</option>
+<option value="Lunda Sul">Lunda Sul</option>
+<option value="Malanje">Malanje</option>
+<option value="Moxico">Moxico</option>
+<option value="Namibe">Namibe</option>
+<option value="Uíge">Uíge</option>
+<option value="Zaire">Zaire</option>
+</select>
+<select id="municipio" required>
+<option value="" selected>Primeiro selecione a Província</option>
+</select>
+<select id="orgao" required>
+<option value="" selected>Selecione o Órgão</option>
+<option value="SME">SME - Serviço de Migração e Estrangeiros</option>
+<option value="SIAC">SIAC - Serviço Integrado de Atendimento ao Cidadão</option>
+</select>
+<div class="erro" id="erro3"></div>
+<button class="btn-voltar" onclick="voltarEtapa(2)">Voltar</button>
+<button onclick="validarEtapa3()">Continuar</button>
+</div>
+
+<div class="etapa hidden" id="etapa4">
+<h3>4. Taxas de Emolumentos</h3>
+<label><input type="radio" name="taxa" value="30500" data-prazo="45 dias" data-nome="Taxa normal"> Taxa normal: 30.500 Kz - 45 dias.</label>
+<label><input type="radio" name="taxa" value="45000" data-prazo="15 dias" data-nome="Taxa urgente"> Taxa urgente: 45.000 Kz - 15 dias.</label>
+<label><input type="radio" name="taxa" value="70000" data-prazo="24 horas" data-nome="Taxa personalizado"> Taxa personalizado: 70.000 Kz - 24 horas.</label>
+<label><input type="radio" name="taxa" value="100000" data-prazo="2 horas" data-nome="Taxa executivo"> Taxa executivo: 100.000 Kz - 2 horas.</label>
+<div class="erro" id="erro4"></div>
+<button class="btn-voltar" onclick="voltarEtapa(3)">Voltar</button>
+<button onclick="validarEtapa4()">Continuar</button>
+</div>
+
+<div class="etapa hidden" id="etapa5">
+<h3>5. Data e Hora</h3>
+<input type="date" id="dataAgendamento" required="" min="2026-09-17" />
+<select id="horaAgendamento" required>
+<option value="" selected>Selecione a hora</option>
+<option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option>
+<option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option>
+<option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option>
+<option>14:00</option><option>14:30</option><option>15:00</option>
+</select>
+<div class="erro" id="erro5"></div>
+<button class="btn-voltar" onclick="voltarEtapa(4)">Voltar</button>
+<button onclick="validarEtapa5()">Continuar</button>
+</div>
+
+<div class="etapa hidden" id="etapa6">
+<h3>6. Pagamento</h3>
+<div id="resumoPagamento" style="background:white;padding:15px;border-radius:5px;margin:10px 0"></div>
+<p><strong>Entidade:</strong> 01148</p>
+<p><strong>Referência:</strong> 945 743 670</p>
+<p>Instruções de Pagamento no ATM ou Multicaixa Express: Pagamentos por Referência.</p>
+<button class="btn-voltar" onclick="voltarEtapa(5)">Voltar</button>
+<button onclick="validarEtapa6()">Já Efetuei o Pagamento</button>
+</div>
+
+<div class="etapa hidden" id="etapa7">
+<h3>7. Comprovativo de Pagamento</h3>
+<input type="file" id="comprovativo" accept="image/*,application/pdf" required>
+<div id="previewComprovativo" style="margin:10px 0"></div>
+<div class="erro" id="erro7"></div>
+<button class="btn-voltar" onclick="voltarEtapa(6)">Voltar</button>
+<button onclick="validarEtapa7()" id="btnGerarRecibo" disabled>Gerar Recibo de Agendamento</button>
+</div>
+
+<div class="etapa hidden" id="etapa8">
+<h3>8. Recibo de Agendamento</h3>
+<div id="dadosRecibo" style="background:white;padding:20px;border-radius:5px"></div>
+<button onclick="baixarPDF()">Baixar Recibo em PDF</button>
+<button onclick="enviarWhatsApp()">Enviar por WhatsApp</button>
+<button onclick="enviarEmail()">Enviar por Email</button>
+<button onclick="novoAgendamento()">Fazer Novo Agendamento</button>
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+<p><strong>SME - Serviço De Migração e Estrangeiros, ANGOLA</strong></p>
+<p>WhatsApp: +244 938 510 719 | Email: sme.gov.contacto@gmail.com</p>
+<p>Sede: Rua Amílcar Cabral, Maianga, Luanda</p>
+<p>© 2026 SME Angola - Todos os direitos reservados</p>
+</div>
+
+<script>
+let dados = {};
+const municipios = {
+'Luanda': ['Belas','Cacuaco','Cazenga','Icolo e Bengo','Kilamba Kiaxi','Luanda','Quiçama','Talatona','Viana'],
+'Bengo': ['Ambriz','Bula Atumba','Dande','Dembos','Nambuangongo','Pango Aluquém'],
+'Benguela': ['Baía Farta','Balombo','Benguela','Bocoio','Caimbambo','Catumbela','Chongoroi','Cubal','Ganda','Lobito'],
+'Bié': ['Andulo','Camacupa','Catabola','Chinguar','Chitembo','Cuemba','Cunhinga','Cuito','Nharea'],
+'Cabinda': ['Belize','Buco-Zau','Cabinda','Cacongo'],
+'Cuando Cubango': ['Calai','Cuangar','Cuchi','Cuito Cuanavale','Dirico','Mavinga','Menongue','Nancova','Rivungo'],
+'Cuanza Norte': ['Ambaca','Banga','Bolongongo','Cambambe','Cazengo','Golungo Alto','Gonguembo','Lucala','Quiculungo','Samba Caju'],
+'Cuanza Sul': ['Amboim','Cassongue','Cela','Conda','Ebo','Libolo','Mussende','Porto Amboim','Quibala','Quilenda','Seles','Sumbe'],
+'Cunene': ['Cahama','Cuanhama','Curoca','Cuvelai','Namacunde','Ombadja'],
+'Huambo': ['Bailundo','Caála','Cachiungo','Chicala Cholohanga','Chinjenje','Ecunha','Huambo','Londuimbali','Longonjo','Mungo','Tchicala Tcholohanga','Ucuma'],
+'Huíla': ['Caconda','Cacula','Caluquembe','Chibia','Chicomba','Chipindo','Gambos','Humpata','Jamba','Lubango','Matala','Quilengues','Quipungo'],
+'Lunda Norte': ['Cambulo','Capenda-Camulemba','Caungula','Chitato','Cuango','Cuilo','Lubalo','Lucapa','Lóvua','Xá-Muteba'],
+'Lunda Sul': ['Cacolo','Dala','Muconda','Saurimo'],
+'Malanje': ['Cacuso','Calandula','Cambundi-Catembo','Cangandala','Caombo','Cuaba Nzogo','Cunda-Dia-Baze','Luquembo','Malanje','Marimba','Massango','Mucari','Quela','Quirima'],
+'Moxico': ['Alto Zambeze','Bundas','Camanongue','Léua','Luacano','Luau','Luchazes','Lumeje','Moxico','Cameia'],
+'Namibe': ['Bibala','Camucuio','Moçâmedes','Tômbua','Virei'],
+'Uíge': ['Alto Cauale','Ambuila','Bembe','Buengas','Bungo','Damba','Milunga','Mucaba','Negage','Puri','Quimbele','Quitexe','Sanza Pombo','Songo','Uíge','Zombo'],
+'Zaire': ['Cuimba','Mbanza Congo','Nóqui','Nezeto','Soio','Tomboco']
+};
+
+function atualizarProgresso(etapa){
+const total=8;const perc=(etapa/total)*100;
+document.getElementById('barraProgresso').style.width=perc+'%';
+document.getElementById('barraProgresso').textContent='Etapa '+etapa+' de '+total;
+}
+
+function mostrarEtapa(num){
+document.querySelectorAll('.etapa').forEach(e=>e.classList.add('hidden'));
+document.querySelectorAll('.etapa').forEach(e=>e.classList.remove('ativa'));
+document.getElementById('etapa'+num).classList.remove('hidden');
+document.getElementById('etapa'+num).classList.add('ativa');
+atualizarProgresso(num);
+window.scrollTo(0,0);
+}
+
+function voltarEtapa(num){mostrarEtapa(num)}
+
+function validarEtapa1(){
+const nome=document.getElementById('nome').value;
+const email=document.getElementById('email').value;
+const tel=document.getElementById('telefone').value;
+const senha=document.getElementById('senha').value;
+if(!nome||!email||!tel||!senha){document.getElementById('erro1').textContent='Preencha todos os campos';document.getElementById('erro1').style.display='block';return}
+if(!email.includes('@')){document.getElementById('erro1').textContent='Email inválido';document.getElementById('erro1').style.display='block';return}
+dados.conta={nome,email,tel};mostrarEtapa(2)}
+
+function validarEtapa2(){
+const nome=document.getElementById('nomeCompleto').value;
+const bi=document.getElementById('bi').value;
+const dataNasc=document.getElementById('dataNasc').value;
+const morada=document.getElementById('morada').value;
+if(!nome||!bi||!dataNasc||!morada){document.getElementById('erro2').textContent='Preencha todos os campos';document.getElementById('erro2').style.display='block';return}
+if(bi.length<11){document.getElementById('erro2').textContent='BI inválido. Formato: 123456789LA123';document.getElementById('erro2').style.display='block';return}
+dados.pessoais={nome,bi,dataNasc,morada};mostrarEtapa(3)}
+
+function carregarMunicipios(){
+const prov=document.getElementById('provincia').value;
+const select=document.getElementById('municipio');
+select.innerHTML='<option value="">Selecione o Município</option>';
+if(municipios[prov]){municipios[prov].forEach(m=>{select.innerHTML+='<option value="'+m+'">'+m+'</option>'})}
+}
+
+function validarEtapa3(){
+const prov=document.getElementById('provincia').value;
+const mun=document.getElementById('municipio').value;
+const org=document.getElementById('orgao').value;
+if(!prov||!mun||!org){document.getElementById('erro3').textContent='Selecione Província, Município e Órgão';document.getElementById('erro3').style.display='block';return}
+dados.local={prov,mun,org};mostrarEtapa(4)}
+
+function validarEtapa4(){
+const taxa=document.querySelector('input[name="taxa"]:checked');
+if(!taxa){document.getElementById('erro4').textContent='Selecione uma taxa';document.getElementById('erro4').style.display='block';return}
+dados.taxa={valor:taxa.value,nome:taxa.dataset.nome,prazo:taxa.dataset.prazo};mostrarEtapa(5)}
+
+function validarEtapa5(){
+const data=document.getElementById('dataAgendamento').value;
+const hora=document.getElementById('horaAgendamento').value;
+if(!data||!hora){document.getElementById('erro5').textContent='Selecione data e hora';document.getElementById('erro5').style.display='block';return}
+dados.agendamento={data,hora};
+const resumo=document.getElementById('resumoPagamento');
+resumo.innerHTML='<p><strong>Modalidade:</strong> '+dados.taxa.nome+'</p><p><strong>Prazo:</strong> '+dados.taxa.prazo+'</p><p><strong>Total a Pagar:</strong> '+Number(dados.taxa.valor).toLocaleString('pt-AO')+' Kz</p>';
+mostrarEtapa(6)}
+
+function validarEtapa6(){mostrarEtapa(7)}
+
+document.getElementById('comprovativo').addEventListener('change',function(e){
+if(e.target.files.length>0){
+document.getElementById('btnGerarRecibo').disabled=false;
+document.getElementById('previewComprovativo').innerHTML='<p class="sucesso">✓ Comprovativo anexado: '+e.target.files[0].name+'</p>';
+dados.comprovativo=e.target.files[0].name;
+}});
+
+function validarEtapa7(){
+if(!dados.comprovativo){document.getElementById('erro7').textContent='Anexe o comprovativo';document.getElementById('erro7').style.display='block';return}
+dados.codigo='SME-2026-'+Math.floor(10000+Math.random()*90000);
+const recibo=document.getElementById('dadosRecibo');
+recibo.innerHTML='<h4>RECIBO DE AGENDAMENTO OFICIAL - SME</h4><p><strong>Código:</strong> '+dados.codigo+'</p><p><strong>Nome:</strong> '+dados.pessoais.nome+'</p><p><strong>BI:</strong> '+dados.pessoais.bi+'</p><p><strong>Província:</strong> '+dados.local.prov+'</p><p><strong>Município:</strong> '+dados.local.mun+'</p><p><strong>Órgão:</strong> '+dados.local.org+'</p><p><strong>Data:</strong> '+dados.agendamento.data+' às '+dados.agendamento.hora+'</p><p><strong>Taxa:</strong> '+dados.taxa.nome+' - '+Number(dados.taxa.valor).toLocaleString('pt-AO')+' Kz</p><p><strong>Entidade:</strong> 01148</p><p><strong>Referência:</strong> 945 743 670</p><p class="sucesso">STATUS: AGENDAMENTO CONFIRMADO</p>';
+mostrarEtapa(8)}
+
+function baixarPDF(){
+const {jsPDF}=window.jspdf;const doc=new jsPDF();
+doc.setFontSize(16);doc.text('RECIBO DE AGENDAMENTO OFICIAL - SME',20,20);
+doc.setFontSize(12);
+let y=40;
+doc.text('Código: '+dados.codigo,20,y);y+=10;
+doc.text('Nome: '+dados.pessoais.nome,20,y);y+=10;
+doc.text('BI: '+dados.pessoais.bi,20,y);y+=10;
+doc.text('Província: '+dados.local.prov,20,y);y+=10;
+doc.text('Município: '+dados.local.mun,20,y);y+=10;
+doc.text('Órgão: '+dados.local.org,20,y);y+=10;
+doc.text('Data: '+dados.agendamento.data+' às '+dados.agendamento.hora,20,y);y+=10;
+doc.text('Taxa: '+dados.taxa.nome,20,y);y+=10;
+doc.text('Valor: '+Number(dados.taxa.valor).toLocaleString('pt-AO')+' Kz',20,y);y+=10;
+doc.text('Entidade: 01148',20,y);y+=10;
+doc.text('Referência: 945 743 670',20,y);y+=10;
+doc.text('STATUS: AGENDAMENTO CONFIRMADO',20,y);
+doc.save('Recibo_SME_'+dados.codigo+'.pdf');
+}
+
+function enviarWhatsApp(){
+const msg=encodeURIComponent('RECIBO SME\nCódigo: '+dados.codigo+'\nNome: '+dados.pessoais.nome+'\nData: '+dados.agendamento.data+' às '+dados.agendamento.hora+'\nLocal: '+dados.local.mun+'/'+dados.local.prov+'\nTaxa: '+Number(dados.taxa.valor).toLocaleString('pt-AO')+' Kz');
+window.open('https://wa.me/244938510719?text='+msg,'_blank');
+}
+
+function enviarEmail(){
+const assunto=encodeURIComponent('Recibo de Agendamento - '+dados.codigo);
+const corpo=encodeURIComponent('Código: '+dados.codigo+'\nNome: '+dados.pessoais.nome+'\nData: '+dados.agendamento.data+' às '+dados.agendamento.hora);
+window.open('mailto:sme.gov.contacto@gmail.com?subject='+assunto+'&body='+corpo,'_blank');
+}
+
+function novoAgendamento(){location.reload()}
+
+// Configurar data mínima
+document.addEventListener('DOMContentLoaded',function(){
+const hoje=new Date().toISOString().split('T')[0];
+document.getElementById('dataAgendamento').min=hoje;
+document.getElementById('dataNasc').max=hoje;
+});
+</script>
+
+
+
+</body>
+</html>
