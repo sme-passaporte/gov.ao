@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sme-passaporte.github.io/gov.ao/sitemap.xml
+
+# SME Angola - Portal Oficial de Agendamento de Passaporte Online
+# Site Oficial: https://sme-passaporte.github.io/gov.ao/
+
+# Contactos: WhatsApp 938 510 719 | Email sme.gov.agendamento@gmail.com
+# Sede: Rua Amilcar Cabral, Maianga, Luanda, Angola
+# Taxas: Normal 30.500 Kz, Urgente 45.000 Kz, Personalizado 70.000 Kz, Executivo 100.000 Kz
+# Entidade 01148 Ref 945 743 670
+
+# Disallow areas privadas
+Disallow: /admin/
+Disallow: /api/private/
+Disallow: /*?*token=*
+Disallow: /*?*comprovativo=*
+
+# Allow assets
+Allow: /logo-sme.png
+Allow: /logo-governo.png
+Allow: /gov.ao/
